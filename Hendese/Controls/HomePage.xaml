@@ -1,0 +1,35 @@
+﻿<Page x:Class="Hendese.Controls.HomePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Hendese.Controls"
+      mc:Ignorable="d" 
+      d:DesignHeight="300"
+      Title="HomePage" Width="490.909">
+
+        <Grid x:Name="MainGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="0" />
+            </Grid.RowDefinitions>
+
+            <Grid x:Name="MenuGrid" Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="loads" Grid.Column="0" Content="load"  
+                            Click="loads_Click" Margin="0,0,5,0" Style="{DynamicResource SquareButtonStyle}" 
+                            RenderTransformOrigin="0.244,-2.278" />
+
+                <Button x:Name="sections" Grid.Column="1" Content="section"  
+                            Click="sections_Click" Margin="5,0,0,0" Style="{DynamicResource SquareButtonStyle}"
+                            RenderTransformOrigin="0.244,-2.278" />
+            </Grid>
+
+            <Grid x:Name="ContentGrid" Grid.Row="1" />
+
+        </Grid>
+</Page>

@@ -1,0 +1,109 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper]{geometry}
+\usepackage{amsmath}
+\usepackage{mathspec}
+\usepackage{polyglossia}
+\usepackage{xunicode}
+\usepackage[bookmarks=true,verbose,colorlinks=true,naturalnames=true,linkcolor=blue]{hyperref}
+\usepackage{graphicx}
+\usepackage{pdfpages}
+\usepackage{longtable}
+\usepackage{setspace}
+\usepackage{listings}
+\usepackage{subfig}
+\usepackage{amssymb}
+\usepackage{textcomp}
+\usepackage{multirow}
+\usepackage{multicol}
+\newenvironment{Figure} 
+{\par\medskip\noindent\minipage{\linewidth}} 
+{\endminipage\par\medskip} 
+\setmainlanguage{english}
+\onehalfspacing
+\setcounter{section}{0}
+\setcounter{subsection}{1}
+\newcommand{\cmark}{\ding{51}}% 
+\newcommand{\xmark}{\ding{55}}% 
+\begin{document}
+\section{Model}
+\begin{longtable}{|*{2}{l|l|}} 
+\hline 
+\textbf{Property} & 
+\textbf{Value} 
+ \\ \hline 
+\endfirsthead 
+\hline 
+\textbf{Property} & \textbf{Value}\\ \hline 
+\endhead 
+\hline 
+\multicolumn{2}{|r|}{{Continued on next page}} \\ \hline 
+\endfoot 
+\endlastfoot 
+\hline 
+DistributedLoad & 100 \\ 
+\hline 
+FMax & 10 \\ 
+\hline 
+Ix & 391,741071428571 \\ 
+\hline 
+LeftSpan & 0,8125 \\ 
+\hline 
+RightSpan & 0,8125 \\ 
+\hline 
+L & 3 \\ 
+\hline 
+DeflectionCriteria & 300 \\ 
+\hline 
+MaxStress & 355 \\ 
+\hline 
+CenteralMoment & 0,0365625 \\ 
+\hline 
+WMin & 10,2992957746479 \\ 
+\hline 
+\end{longtable} 
+\begin{Figure} 
+\includegraphics[width=\linewidth]{C:/tempLaTeX/0.png} 
+\caption{Model Çizimi} 
+\label{} 
+\end{Figure} 
+\section{Sections}
+\begin{longtable}{|*{8}{l|l|l|l|l|l|l|l|}} 
+\hline 
+\textbf{Name} & 
+\textbf{A} & 
+\textbf{I22} & 
+\textbf{I33} & 
+\textbf{W22} & 
+\textbf{W33} & 
+\textbf{IRatio} & 
+\textbf{WRatio} 
+ \\ \hline 
+\endfirsthead 
+\hline 
+\textbf{Name} & \textbf{A} & \textbf{I22} & \textbf{I33} & \textbf{W22} & \textbf{W33} & \textbf{IRatio} & \textbf{WRatio}\\ \hline 
+\endhead 
+\hline 
+\multicolumn{8}{|r|}{{Continued on next page}} \\ \hline 
+\endfoot 
+\endlastfoot 
+\hline 
+IPE A 100 & 8,78 & 13,12 & 141,2 & 4,77 & 28,81 & 2,77 & 0,36 \\ 
+\hline 
+IPE 100 & 10,32 & 15,92 & 171 & 5,79 & 34,2 & 2,29 & 0,30 \\ 
+\hline 
+IPE A 120 & 11,03 & 22,39 & 257,4 & 7 & 43,77 & 1,52 & 0,24 \\ 
+\hline 
+HE 100 AA & 15,6 & 92,06 & 236,5 & 18,41 & 51,98 & 1,66 & 0,20 \\ 
+\hline 
+HE 100 A & 21,24 & 133,8 & 349,2 & 26,76 & 72,76 & 1,12 & 0,14 \\ 
+\hline 
+HE 100 B & 26,04 & 167,3 & 449,5 & 33,45 & 89,91 & 0,87 & 0,11 \\ 
+\hline 
+L 100 x 100 x 8 & 15,51 & 144,8 & 144,8 & 19,94 & 19,94 & 2,71 & 0,52 \\ 
+\hline 
+L 100 x 100 x 10 & 19,2 & 176,7 & 176,7 & 24,62 & 24,62 & 2,22 & 0,42 \\ 
+\hline 
+L 100 x 100 x 12 & 22,71 & 206,7 & 206,7 & 29,12 & 29,12 & 1,90 & 0,35 \\ 
+\hline 
+\end{longtable} 
+\end{document}

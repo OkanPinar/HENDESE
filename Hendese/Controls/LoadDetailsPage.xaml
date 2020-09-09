@@ -1,0 +1,71 @@
+﻿<Page x:Class="Hendese.Controls.LoadDetailsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Hendese.Controls"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="LoadDetailsPage">
+    <Page.Resources>
+        <ContextMenu x:Key="HoverMenu">
+            <MenuItem Header="IPE" IsCheckable="True" IsChecked="True" StaysOpenOnClick="True" />
+            <MenuItem Header="IPN" IsCheckable="True" IsChecked="False" StaysOpenOnClick="True" />
+            <MenuItem Header="HE" IsCheckable="True" IsChecked="True" StaysOpenOnClick="True" />
+            <MenuItem Header="L" IsCheckable="True" IsChecked="False" StaysOpenOnClick="True" />
+            <MenuItem Header="C" IsCheckable="True" IsChecked="False" StaysOpenOnClick="True" />
+            <MenuItem Header="HD" IsCheckable="True" IsChecked="False" StaysOpenOnClick="True" />
+            <MenuItem Header="HJ" IsCheckable="True" IsChecked="False" StaysOpenOnClick="True" />
+            <MenuItem Header="HP(US)" IsCheckable="True" IsChecked="False" StaysOpenOnClick="True" />
+            <MenuItem Header="HP" IsCheckable="True" IsChecked="False" StaysOpenOnClick="True" />
+            <MenuItem Header="Li" IsCheckable="True" IsChecked="False" StaysOpenOnClick="True" />
+            <MenuItem Header="UAP" IsCheckable="True" IsChecked="False" StaysOpenOnClick="True" />
+            <MenuItem Header="UB" IsCheckable="True" IsChecked="False" StaysOpenOnClick="True" />
+            <MenuItem Header="UBP(=HP UK)" IsCheckable="True" IsChecked="False" StaysOpenOnClick="True" />
+            <MenuItem Header="UC" IsCheckable="True" IsChecked="False" StaysOpenOnClick="True" />
+            <MenuItem Header="UPN" IsCheckable="True" IsChecked="False" StaysOpenOnClick="True" />
+            <MenuItem Header="W" IsCheckable="True" IsChecked="False" StaysOpenOnClick="True" />
+            <MenuItem Header="Li" IsCheckable="True" IsChecked="False" StaysOpenOnClick="True" />
+        </ContextMenu>
+    </Page.Resources>
+    
+    <Grid x:Name="ModelGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*" />
+            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="10*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+
+            <Grid x:Name="ModelInput" />
+
+            <Button x:Name="GetSections" Content="GET SECTIONS" 
+                    HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="auto"
+                    ContextMenu="{StaticResource HoverMenu}" Click="GetSections_Click" />
+            <TextBlock Text="Right click on button to choose section groups then press the button"
+                           Grid.Row="1" Margin="0,35,0,0" TextWrapping="WrapWithOverflow" />
+
+
+        </Grid>
+
+        <Grid x:Name="ModelOutput" Grid.Column="1" Width="auto">
+
+        </Grid>
+
+        <Grid x:Name="SectionsDatagrid" Grid.Column="2">
+            <Grid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem x:Name="menuGetReport" Header="Get PDF Report" Click="menuGetReport_Click" />
+                </ContextMenu>
+            </Grid.ContextMenu>
+        </Grid>
+
+
+    </Grid>
+</Page>

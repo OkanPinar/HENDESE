@@ -1,0 +1,82 @@
+﻿<Window x:Class="Hendese.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hendese"
+        xmlns:tb="http://www.hardcodet.net/taskbar"
+        mc:Ignorable="d"
+        Title="MainWindow"
+        ShowInTaskbar="False"
+        WindowStyle="None" 
+        ResizeMode="NoResize"
+        AllowsTransparency="True"
+        MouseDown="Window_MouseDown"
+        MouseEnter="Window_MouseEnter"
+        MouseMove="Window_MouseMove"
+        Activated="Window_Activated"
+        Visibility="Visible" 
+        Topmost="True" 
+        Height="420" Width="700"  Foreground="White">
+    <Window.Resources>
+        <Storyboard x:Key="gridFadeInStoryBoard">
+            <DoubleAnimation Storyboard.TargetName="MainGrid" BeginTime="0:0:0.1"
+                Storyboard.TargetProperty="Opacity" From="0.00" To="1.00" AutoReverse="False" Duration="0:0:0.3" />
+        </Storyboard>
+        <Storyboard x:Key="gridFadeOutStoryBoard">
+            <DoubleAnimation Storyboard.TargetName="MainGrid" BeginTime="0:0:0.5"
+                Storyboard.TargetProperty="Opacity" From="1.00" To="0.00" AutoReverse="False" Duration="0:0:0.3" />
+        </Storyboard>
+    </Window.Resources>
+
+    <Grid>
+
+        <Border Padding="10, 0, 10, 10"
+                BorderBrush="Black"
+                Background="AliceBlue"
+                BorderThickness="1,1,1,1">
+            <Grid>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" Background="#3F3F46" Margin="-10, 0, -10, 0">
+                    <Button Click="btnBack_Click" Grid.Row="0" Padding="0"
+                        Width="75" Height="30" MouseEnter="btnMouseEnter"
+                        HorizontalAlignment="Left" VerticalAlignment="Top" Style="{DynamicResource SquareButtonStyle}"
+                        Background="Transparent" BorderThickness="0">
+                        <StackPanel Margin="0" Orientation="Horizontal">
+                            <Image Source="Icons/back.png" Height="25" />
+                            <TextBlock Text=" Back" VerticalAlignment="Center"
+                                       Foreground="#aaa"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button Content="-" Click="btnMinimize_Click" Grid.Row="0" 
+                Width="30" Height="30" Margin="0,0,30.4,0" MouseEnter="btnMouseEnter"
+                HorizontalAlignment="Right" VerticalAlignment="Top" Style="{DynamicResource SquareButtonStyle}"
+                            BorderThickness="0" Background="Transparent" BorderBrush="Transparent"
+                            Foreground="#aaa" />
+
+                    <Button Content="x" Click="btnClose_Click" Grid.Row="0" 
+                Width="30" Height="30" x:Name="btnClose" MouseEnter="btnMouseEnter"
+                HorizontalAlignment="Right" VerticalAlignment="Top" Style="{DynamicResource SquareButtonStyle}"
+                            BorderThickness="0" Background="Red" BorderBrush="Transparent"
+                            Foreground="White">
+                    </Button>
+                </Grid>
+
+
+                <Grid x:Name="MainGrid" Grid.Row="1" Margin="0,10,0,0"/>
+
+
+
+            </Grid>
+            <Border.Effect>
+                <DropShadowEffect Color="BlueViolet" Opacity="0.5" />
+            </Border.Effect>
+        </Border>
+    </Grid>
+</Window>
