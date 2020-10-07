@@ -1,4 +1,5 @@
 import math
+from enum import Enum
 
 
 class SectionBase(object):
@@ -22,7 +23,7 @@ class SectionBase(object):
                   self.section_modulus_y, self.radius_of_gyration_x, self.radius_of_gyration_y, self.weight_per_meter)
 
 
-class Rectangular(SectionBase):
+class Rectangular(SectionBase): #RHS
 
     def __init__(self, height, width):
         super(Rectangular, self).__init__()
@@ -38,21 +39,21 @@ class Rectangular(SectionBase):
         self.weight_per_meter = self.density * self.area * 10
 
 
-class Square(Rectangular):
+class Square(Rectangular): #SHS
 
     def __init__(self, dimension):
         super(Square, self).__init__(dimension, dimension)
 
 
-class Pipe(SectionBase):
+class Pipe(SectionBase): # CHS
 
     def __init__(self, outer_diameter, thickness):
         super(Pipe, self).__init__()
         self.outer_diameter = outer_diameter
         self.thickness = thickness
-        self.area = math.pi * (outer_diameter ** 2.0 - (outer_diameter - 2 * thickness) ** 2.0) / 400
+        self.area = math.pi * (outer_diameter ** 2.0 - (outer_diameter - 2 * thickness) ** 2.0) / 400  # cm^2
         self.moment_of_inertia_strong = math.pi * (
-                outer_diameter ** 4 - (outer_diameter - 2 * thickness) ** 4) / 64 / 10 ** 4
+                outer_diameter ** 4 - (outer_diameter - 2 * thickness) ** 4) / 64 * 1e-4
         self.moment_of_inertia_weak = self.moment_of_inertia_strong
         self.section_modulus_x = self.moment_of_inertia_strong * 20 / outer_diameter
         self.section_modulus_y = self.section_modulus_x
@@ -61,13 +62,13 @@ class Pipe(SectionBase):
         self.weight_per_meter = self.density * self.area * 10
 
 
-class RoundBar(Pipe):
+class RoundBar(Pipe): #CSS
 
     def __init__(self, diameter):
         super(RoundBar, self).__init__(diameter, diameter / 2)
 
 
-class IProfile(SectionBase):
+class IProfile(SectionBase): #ISection
 
     def __init__(self, height, width, tw, tf):
         super(IProfile, self).__init__()
@@ -85,7 +86,7 @@ class IProfile(SectionBase):
         self.weight_per_meter = self.density * self.area * 10
 
 
-class TProfile(SectionBase):
+class TProfile(SectionBase): #TSection
 
     def __init__(self, height, width, tw, tf):
         super(TProfile, self).__init__()
@@ -113,7 +114,7 @@ class TProfile(SectionBase):
             self.eccentricity_from_bot, self.eccentricity_from_top)
 
 
-class BoxProfile(SectionBase):
+class BoxProfile(SectionBase): #RSS(Rectengular solid section)
 
     def __init__(self, height, width, tw, tf):
         super(BoxProfile, self).__init__()
@@ -131,7 +132,7 @@ class BoxProfile(SectionBase):
         self.weight_per_meter = self.density * self.area * 10
 
 
-class UProfile(SectionBase):
+class UProfile(SectionBase): # U section
 
     def __init__(self, height, width, thickness):
         super(UProfile, self).__init__()
@@ -159,7 +160,7 @@ class UProfile(SectionBase):
         self.weight_per_meter = self.density * self.area * 10
 
 
-class CProfile(SectionBase):
+class CProfile(SectionBase): # CSection
 
     def __init__(self, height, width, thickness, c):
         super(CProfile, self).__init__()
@@ -176,17 +177,17 @@ class CProfile(SectionBase):
         self.length = self.area / thickness * 100
         self.eccentricity_from_body = ((thickness * (self.s + self.length) * width / 2 - self.s * thickness * (width -
                                                                                                                thickness / 2)) / (
-                                                   self.area * 100)) / 10
+                                               self.area * 100)) / 10
         self.moment_of_inertia_strong = (width * height ** 3 - (width - 2 * thickness) * (height - 2 * thickness) ** 3
                                          - thickness * self.s ** 3) / 120000
         self.moment_of_inertia_weak = ((height - 2 * thickness) * (thickness ** 3) / 12 + (height - 2 * thickness) *
                                        thickness * (self.eccentricity_from_body * 10 - thickness / 2) ** 2 + 2 *
                                        thickness * (width - 2 * thickness) ** 3 / 12 + 2 * thickness * (width - 2 *
                                                                                                         thickness) * (
-                                                   width / 2 - self.eccentricity_from_body * 10) ** 2 + 2 *
+                                               width / 2 - self.eccentricity_from_body * 10) ** 2 + 2 *
                                        thickness * (c - thickness - self.ridge) ** 3 + 2 * thickness * (c - thickness -
                                                                                                         self.ridge) * (
-                                                   width - thickness / 2 - self.eccentricity_from_body) ** 2) / 10000
+                                               width - thickness / 2 - self.eccentricity_from_body) ** 2) / 10000
         self.section_modulus_x = 20 * self.moment_of_inertia_strong / height
         self.section_modulus_y = self.moment_of_inertia_weak / (width / 10 - self.eccentricity_from_body)
         self.radius_of_gyration_x = math.sqrt(self.moment_of_inertia_strong / self.area)
@@ -194,7 +195,7 @@ class CProfile(SectionBase):
         self.weight_per_meter = self.density * self.area * 10
 
 
-class LProfile(SectionBase):
+class LProfile(SectionBase): #AngularSection
 
     def __init__(self, height, width, thickness):
         super(LProfile, self).__init__()
@@ -332,6 +333,120 @@ class Trial(BoltResistance):
         self.shear = self.UTS * self.shear_resistance_factor * stressarea / 100 / 1.25
 
 
+class PlaneSectionForce(object):
+
+    def __init__(self):
+        self.V2 = 0.0
+        self.M3 = 0.0
+
+
+class SectionForces(PlaneSectionForce):
+
+    def __init__(self):
+        super(SectionForces, self).__init__()
+        self.N = 0.0
+        self.V2 = 0.0
+        self.T = 0.0
+        self.M2 = 0.0
+
+
+
+
+
+class Material(object):
+
+    def __init__(self, rho, modulus_of_elasticity, nu):
+        self.rho = rho  # unit weight
+        self.modulus_of_elasticity = modulus_of_elasticity
+        self.nu = nu #poisson ratio
+
+
+class SteelMaterial(Material):
+
+    def __init__(self, yield_stress, tensile_stress):
+        super(SteelMaterial, self).__init__(78.5, 210, 0.3) # kN/m^3 , GPa
+        self.f_y = yield_stress
+        self.f_u = tensile_stress
+
+SteelMaterial.S235 = SteelMaterial(235, 310)
+SteelMaterial.S275 = SteelMaterial(275, 460)
+SteelMaterial.S355 = SteelMaterial(355, 510)
+
+
+class SimpleSupportedBeamTypes(Enum):
+    UNIFORM_DISTRIBUTED_LOADED = 1
+    MID_POINT_LOADED = 2
+
+
+class BeamBase(object):
+
+    def __init__(self, material, section):
+        self.support_reactions = []
+        self.beam_internal_forces = dict()
+        self.length = 0.0
+        self.material = material
+        self.section = section
+
+    def get_maximum_moment(self):
+        raise NotImplemented("this method should be implemented")
+
+    def get_maximum_shear(self):
+        raise NotImplemented("this method should be implemented")
+
+    def get_maximum_deflection(self):
+        raise NotImplemented("this method should be implemented")
+
+
+class SimpleSupportedBeam(BeamBase):
+
+    def __init__(self, beam_type, length, load_value, material, section):  # length in mm, load in kN & m
+        super(SimpleSupportedBeam, self).__init__(material, section)
+        self.beam_type = beam_type
+        self.length = length
+        self.load = load_value
+
+    def get_maximum_moment(self):
+        if self.beam_type == SimpleSupportedBeamTypes.UNIFORM_DISTRIBUTED_LOADED:
+            ret = PlaneSectionForce()
+            ret.M3 = self.load * self.length ** 2.0 / 8.0
+            ret.V2 = 0
+            return ret
+        elif self.beam_type == SimpleSupportedBeamTypes.MID_POINT_LOADED:
+            pass
+        else:
+            raise NotImplemented("The given beam type(%) is not implemented") % self.beam_type
+
+    def get_maximum_shear(self):
+        if self.beam_type == SimpleSupportedBeamTypes.UNIFORM_DISTRIBUTED_LOADED:
+            ret = PlaneSectionForce()
+            ret.M3 = 0
+            ret.V2 = self.load * self.length / 2.0
+            return ret
+        elif self.beam_type == SimpleSupportedBeamTypes.MID_POINT_LOADED:
+            pass
+        else:
+            raise NotImplemented("The given beam type(%) is not implemented") % self.beam_type
+
+    def get_maximum_deflection(self):
+        if self.beam_type == SimpleSupportedBeamTypes.UNIFORM_DISTRIBUTED_LOADED:
+            return 5/384 * self.load * self.length ** 4.0 / (self.material.modulus_of_elasticity * self.section.moment_of_inertia_strong)
+        elif self.beam_type == SimpleSupportedBeamTypes.MID_POINT_LOADED:
+            pass
+        else:
+            raise NotImplemented("The given beam type(%) is not implemented") % self.beam_type
+
+
+def TestSimpleSupported():
+    material = SteelMaterial.S235
+    section = Rectangular(300, 500)
+    beam = SimpleSupportedBeam(SimpleSupportedBeamTypes.UNIFORM_DISTRIBUTED_LOADED, 3000, 10, material, section )
+    print("maximum moment :", beam.get_maximum_moment().M3)
+    print("maximum shear :", beam.get_maximum_shear().V2)
+    print("maximum deflection :", beam.get_maximum_deflection())
+
+
+TestSimpleSupported()
+
 # section = Rectangular(40, 14)
 # print(section.__str__())
 
@@ -362,5 +477,5 @@ class Trial(BoltResistance):
 # section9 = TwoStackedBoxes(100, 100, 4, 4, 80, 80, 3, 3)
 # print(section9.__str__())
 
-section10 = Trial(5.6, 58, 4)
-print(section10.__str__())
+# section10 = Trial(5.6, 58, 4)
+# print(section10.__str__())
