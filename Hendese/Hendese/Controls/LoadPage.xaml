@@ -1,0 +1,48 @@
+﻿<Page x:Class="Hendese.Controls.LoadPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Hendese.Controls"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="LoadPage">
+    <Page.Resources>
+        <Image x:Key="SimpleSingleLoad" Source="../Icons/SimpleSingleLoad.png" />
+        <Image x:Key="SimpleDistributedLoad" Source="../Icons/SimpleDistributedLoad.png" />
+        <Image x:Key="ConsolSingleLoad" Source="../Icons/ConsolSingleLoad.png" />
+        <Image x:Key="ConsolDistributedLoad" Source="../Icons/ConsolDistributedLoad.png" />
+        <Image x:Key="FixedSingleLoad" Source="../Icons/FixedSingleLoad.png" />
+        <Image x:Key="FixedDistributedLoad" Source="../Icons/FixedDistributedLoad.png" />
+    </Page.Resources>
+    <Grid Grid.Row="1" Margin="0,6.8,0,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Button x:Name="SimpleSingleLoad" Grid.Row="0" Grid.Column="0"
+                     Content="{StaticResource SimpleSingleLoad}" Click="Model_Click"
+                     Margin="0,0,3,3" Style="{DynamicResource SquareButtonStyle}" />
+        <Button x:Name="SimpleDistributedLoad" Grid.Row="0" Grid.Column="1"
+                    Content="{StaticResource SimpleDistributedLoad}" Click="Model_Click"
+                    Margin="3,0,0,3" Style="{DynamicResource SquareButtonStyle}" />
+        <Button x:Name="ConsolSingleLoad" Grid.Row="1" Grid.Column="0"
+                    Content="{StaticResource ConsolSingleLoad}" Click="Model_Click"
+                    Margin="0,3,3,3" Style="{DynamicResource SquareButtonStyle}" />
+        <Button x:Name="ConsolDistributedLoad" Grid.Row="1" Grid.Column="1"
+                    Content="{StaticResource ConsolDistributedLoad}" Click="Model_Click"
+                    Margin="3,3,0,3" Style="{DynamicResource SquareButtonStyle}" />
+        <Button x:Name="FixedSingleLoad" Grid.Row="2" Grid.Column="0"
+                    Content="{StaticResource FixedSingleLoad}" Click="Model_Click"
+                    Margin="0,3,3,0" Style="{DynamicResource SquareButtonStyle}" />
+        <Button x:Name="FixedDistributedLoad" Grid.Row="2" Grid.Column="2"
+                    Content="{StaticResource FixedDistributedLoad}" Click="Model_Click"
+                    Margin="3,3,0,0" Style="{DynamicResource SquareButtonStyle}" />
+    </Grid>
+</Page>
